@@ -26,3 +26,7 @@ This adds browser/WKWebView input support, not a signed native iOS application. 
 In Before the Story / The Last Juko, CAMERA switches Josiah between first and third person, OPEN uses the nearby castle door, and FIRE/RELOAD operate his pistol. Room 25 takes over for a cinematic; touch controls return when another playable section begins.
 
 Windows alternate fire: press or hold Z to shoot or use the current chain attack. Left-click and touch FIRE remain available. Releasing Z, pausing, leaving combat, or switching apps stops keyboard firing.
+
+## Look
+
+Action buttons are round, evenly spaced and fill from the bottom-right, so a partial row lines up with the screen edge. FIRE is the red button. The joystick is a frosted ring with a soft knob. Pause (Ⅱ) and the controls guide (?) are two small round buttons in the top-right corner during play; outside play the guide button returns to its full "CONTROLS" label. With the large touch targets setting on, the buttons grow from 54 px to 62 px and the grid grows with them, so they never overlap. On touch screens the minimap drops its text legend to stay clear of the buttons.
