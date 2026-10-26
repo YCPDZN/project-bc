@@ -1,0 +1,44 @@
+/* Chapter 3 is a prequel narration. Its completion is separate from the campaign. */
+const BEFORE_STORY_LAST_JUKO_LINES=[
+ 'In 2010, I learned that Takeshi Juko had died of stage four cancer. After all the reports, all the threats, and all the searching, it was illness that finally brought his story to an end. Kenji had given me nothing in Shibuya. Now there was no Takeshi left to question.',
+ 'I returned to the Foreign Office and resumed my work. In time, I reached the grade of Deputy Director, working inside the Cabinet Office. There were new responsibilities, new briefings, and new reasons to tell myself that the investigation in Japan belonged to the past.',
+ 'But a closed file is not always a finished story. The dying priest’s words remained with me: you will help me reach the stars, whether you like it or not. I could put the papers away. I could not put that voice out of my head.',
+ 'During one of my periods of leave, I returned to Japan. This time, I was travelling without the protection of an official investigation. I wanted to understand what remained of the Juko family after the deaths of the two brothers who had once commanded so much fear.',
+ 'That was when I met a woman named Boki Juko. Takeshi and Bozuki had been her brothers. She was grieving them both, and she was searching for her nephew, Takeshi’s son, who was now an orphan. For a moment, I believed I had found someone who needed help rather than another person with something to conceal.',
+ 'When I approached her, she was dismissive. My name meant nothing to her, or so she wanted me to believe. She brushed aside my questions, rejected my offer of assistance, and made it quite clear that she did not want a British official interfering in her affairs.',
+ 'I could understand grief. I could understand mistrust. What unsettled me was how carefully she controlled the conversation. Whenever I mentioned her brothers, she turned away. Whenever Osaka Castle was mentioned, she listened. There was an intention behind her silence that grief alone could not explain.',
+ 'My suspicions led me towards Osaka Castle, the fortress of Hideyoshi Toyotomi. Beneath its towers and stone foundations, there was a source of power unlike anything described in the reports I had brought back to London. The castle was guarding more than the memory of an old ruler.',
+ 'That power could shape nations. I began to think of it as chains: something that could bind people together, or hold them beneath another person’s will. In the wrong hands, a country would become something to pull, tighten, and command. Boki knew more about it than she would admit.',
+ 'Her search for her orphaned nephew was real, but it was not the whole truth. Boki Juko had a sinister agenda of her own, and the power within Osaka Castle was part of it. I had returned to Japan believing the two brothers’ deaths had ended the danger. I was beginning to understand what the last Juko intended to inherit.'
+];
+const beforeStoryLastJukoVoices=["assets/OSAKA1.mp3","assets/OSAKA2.mp3","assets/OSAKA3.mp3","assets/OSAKA4.mp3","assets/OSAKA5.mp3","assets/OSAKA6.mp3","assets/OSAKA7.mp3","assets/OSAKA8.mp3","assets/OSAKA9.mp3","assets/OSAKA10.mp3"].map(src=>{const clip=new Audio(src);clip.preload='metadata';clip.volume=.9;AudioOptions.category(clip,'voice');return clip;});
+function playBeforeStoryLastJukoVoice(){const c=beforeStoryScene,index=c.line,clip=beforeStoryLastJukoVoices[index];c.voiceFailed=false;clip.muted=muted;clip.play()?.catch(()=>{if(mode==='beforeStoryLastJuko'&&beforeStoryScene===c&&c.line===index)c.voiceFailed=true;});}
+function buildBeforeStoryLastJuko(){
+ const c=beforeStoryScene,r=new THREE.Group();c.root.add(r);c.lastJukoSet=r;
+ const stone=mat(0x657379),cream=mat(0xe2e0c9),wood=mat(0x35362d),roof=mat(0x335e59,.55),gold=mat(0xd8bc69,.3),water=mat(0x234452,.22);
+ box(r,90,.12,90,water,0,-.4,-5);box(r,29,.3,20,stone,0,-.15,9);box(r,5,.25,13,mat(0x859492),0,.02,-1);
+ const base=mesh(new THREE.CylinderGeometry(9,11,3,4),stone,r,0,1.35,-12);base.rotation.y=Math.PI/4;base.scale.z=.75;
+ for(let level=0;level<5;level++){
+  const w=13-level*1.8,d=9-level*1.1,y=3.5+level*2.05;box(r,w,1.8,d,cream,0,y,-12);box(r,w+.2,.15,d+.2,wood,0,y-.76,-12);
+  for(const side of [-1,1])for(let x=-w/2+1;x<w/2;x+=1.3){box(r,.44,.7,.06,wood,x,y+.1,-12+side*(d/2+.04));box(r,.07,1.5,.08,wood,x+.42,y,-12+side*(d/2+.07));}
+  const cap=mesh(new THREE.ConeGeometry(1,1.1,4),roof,r,0,y+1.24,-12);cap.rotation.y=Math.PI/4;cap.scale.set((w+2)/Math.SQRT2,1,(d+1.8)/Math.SQRT2);
+  for(const side of [-1,1]){line3(r,[[-w/2-1,y+.86,-12+side*(d/2+.9)],[0,y+.68,-12+side*(d/2+.9)],[w/2+1,y+.86,-12+side*(d/2+.9)]],roof,.11);for(const x of [-w/2-1,w/2+1])ball(r,.12,.19,.12,gold,x,y+.97,-12+side*(d/2+.9));}
+ }
+ box(r,1.8,2,.1,wood,0,3.1,-7.44);for(const x of [-1.5,1.5])line3(r,[[x,12.7,-12],[x*.8,13.8,-12],[x*.5,14.2,-12]],gold,.1);
+ for(const side of [-1,1]){const x=side*6,z=7;box(r,.8,.3,.8,stone,x,.15,z);box(r,.24,1.2,.24,stone,x,.8,z);box(r,.9,.65,.9,cream,x,1.7,z);box(r,1.2,.17,1.2,roof,x,2.13,z);const light=new THREE.PointLight(0xffd99d,9,8);light.position.set(x,1.7,z+.25);r.add(light);ball(r,.20,.22,.20,new THREE.MeshBasicMaterial({color:0xffdc9b}),x,1.7,z+.47);}
+ for(const side of [-1,1])for(const z of [-4,6,15]){const x=side*(11+(z%3));mesh(new THREE.CylinderGeometry(.18,.3,3,8),wood,r,x,1.5,z);for(let k=0;k<4;k++)ball(r,1.7,.8,1.35,mat(k%2?0x793443:0x91464e),x+Math.sin(k*2)*.7,3+k*.4,z+Math.cos(k*2)*.7);}
+ c.lastJukoChains=new THREE.Group();c.lastJukoChains.position.set(0,5,-12);r.add(c.lastJukoChains);for(let i=0;i<160;i++){const angle=i/160*TAU,link=mesh(new THREE.TorusGeometry(.19,.047,7,12),gold,c.lastJukoChains,Math.sin(angle)*10,Math.sin(angle*3)*.5,Math.cos(angle)*7);link.rotation.set(Math.PI/2,i%2?Math.PI/2:0,-angle);}
+ c.lastJukoChains.visible=false;const moon=new THREE.DirectionalLight(0xb8d1ff,2.2);moon.position.set(4,20,8);r.add(moon);r.add(new THREE.HemisphereLight(0x99aecb,0x383335,1.3));
+}
+function startBeforeStoryLastJuko(){
+ const c=beforeStoryScene;if(!c||mode!=='beforeStoryMenu'||!beforeStoryProgress.jukoCompleted)return;
+ loadChapterScreen('CHAPTER 3: THE LAST JUKO — 2010',()=>{if(beforeStoryScene!==c)return;stopBeforeStoryVoice();clearBeforeStoryKenji();c.chapter='lastJuko';c.line=0;c.beat=0;if(c.crownMenu)c.crownMenu.visible=false;setMode('beforeStoryLastJuko');hideUndeadCampaignCast();world.visible=upperWorld.visible=exhibit.visible=flash.visible=false;beforeStoryUI.hidden=true;c.menuSet.visible=false;if(c.romeSet)c.romeSet.visible=false;if(!c.jukoSet)buildBeforeStoryJuko();if(!c.lastJukoSet)buildBeforeStoryLastJuko();for(const actor of Object.values(c.cast))actor.visible=false;beforeStoryCinema.hidden=false;document.getElementById('beforeStoryCinemaChapter').textContent='BEFORE THE STORY / CHAPTER 3';document.getElementById('beforeStoryCinemaTitle').innerHTML='THE LAST JUKO <span>2010</span>';showBeforeStoryLastJukoLine();renderBeforeStoryLastJuko(0);syncMenuSong();});
+}
+function showBeforeStoryLastJukoLine(){
+ const c=beforeStoryScene;stopBeforeStoryVoice();c.beat=0;c.jukoSet.visible=c.line<3;c.lastJukoSet.visible=c.line>=3;c.lastJukoChains.visible=c.line>=8;
+ scene.background.setHex(c.line<3?0x101822:0x202936);scene.fog.color.setHex(c.line<3?0x101822:0x303b46);scene.fog.density=c.line<3?.02:.008;ambient.intensity=c.line<3?.75:1.15;cameraFill.intensity=.4;
+ document.getElementById('beforeStorySpeaker').textContent='JOSIAH RICHARDS / NARRATION';document.getElementById('beforeStoryLine').textContent=BEFORE_STORY_LAST_JUKO_LINES[c.line];document.getElementById('beforeStoryCount').textContent=(c.line+1)+' / '+BEFORE_STORY_LAST_JUKO_LINES.length;document.getElementById('beforeStoryNext').textContent=c.line===BEFORE_STORY_LAST_JUKO_LINES.length-1?'BOKI JUKO →':'CONTINUE →';playBeforeStoryLastJukoVoice();
+}
+function advanceBeforeStoryLastJuko(){const c=beforeStoryScene;if(mode!=='beforeStoryLastJuko'||!c)return;if(c.line===BEFORE_STORY_LAST_JUKO_LINES.length-1){startBeforeStoryBoki();return;}c.line++;showBeforeStoryLastJukoLine();}
+function renderBeforeStoryLastJuko(dt){const c=beforeStoryScene;if(!c)return;beforeStoryLastJukoVoices[c.line].muted=muted;dt=Math.min(.05,Math.max(0,dt));c.time+=dt;c.beat+=dt;camera.up.set(0,1,0);if(c.line<3){camera.position.copy(c.root.position).add(new THREE.Vector3(Math.sin(c.time*.1)*.2,2.4,5.2));camera.lookAt(c.root.position.clone().add(new THREE.Vector3(0,1.8,-2)));}else{const t=c.beat*.025,x=c.line>=7?14:17;camera.position.copy(c.root.position).add(new THREE.Vector3(x+Math.sin(t)*1.3,c.line>=7?8:6.5,23-Math.sin(t)*1.2));camera.lookAt(c.root.position.clone().add(new THREE.Vector3(0,6,-10)));if(c.lastJukoChains.visible)c.lastJukoChains.rotation.y=c.beat*.025;}camera.updateMatrixWorld(true);}
+document.getElementById('beforeStoryLastJuko').onclick=startBeforeStoryLastJuko;

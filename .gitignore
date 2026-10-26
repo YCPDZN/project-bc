@@ -1,0 +1,18 @@
+# Generated exports and build output
+*.zip
+*.exe
+*.ipa
+/dist/
+/Project BC.html
+
+# Local dependencies, secrets and editor files
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/

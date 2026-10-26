@@ -1,0 +1,85 @@
+/* Character story 03 owns its Peter model, cinematic and completion flag. */
+const PETER_ADMINISTRATOR_LINES=[
+ 'People notice the speeches, the handshakes, the men standing outside important doors. They rarely notice the person who prepares the papers. I rather prefer it that way. A quiet desk gives you time to understand what everyone else is rushing to sign.',
+ 'Another report. Another request marked urgent by someone who left it until Friday afternoon. I shall check the figures, correct the wording, and send it back. They will call it a small task. Small tasks have a habit of keeping large institutions standing.',
+ 'I write everything down. Not because I distrust people, of course. Simply because memories become remarkably flexible once a decision goes wrong. A clear record is useful. Especially when everyone suddenly remembers being against the idea.',
+ 'There is a peculiar comfort in putting things in order. A page that made no sense becomes readable. A problem acquires a heading, a deadline, and somebody responsible for it. If only people were as willing to stay where you put them.',
+ 'For now, there are notes to finish and an inbox to clear. No grand entrance. No audience. Just Peter Chambers, a quiet administrator, making certain the machinery keeps turning. Someone has to know how it works before anyone can decide who should run it.',
+ 'There is one Director General whose name makes me pause whenever it appears on a paper: Josiah Richards. I admire him, although I doubt he would recognise me in a corridor. Some people spend their careers moving files. He seems to have spent his changing what those files are about.',
+ 'The Hero of Sendai. That is what they call him. Most of us are pleased if a difficult briefing survives the afternoon without a correction. Richards comes back with a reputation that travels ahead of him. I cannot help wondering what it takes to become someone people remember like that.',
+ 'And then there is Osaka. The Explorer of Osaka, they say, as though it belongs in a book rather than a departmental conversation. I have heard enough fragments to know that there is more behind that title than anyone puts in a routine report. I should very much like to hear it from the man himself.',
+ 'Unfortunately, I am a rather boring Grade 7. My world consists of drafts, deadlines, and invitations to meetings that a Director General has no reason to attend. I do not interact with Richards much. Usually, the nearest I get is a name on an email chain and a request passed down through someone else.',
+ 'Perhaps one day I shall prepare a paper he actually wants to discuss. Nothing theatrical. Just something precise, useful, and impossible to overlook. Until then, I shall keep my notes in order. Even the Hero of Sendai and the Explorer of Osaka must occasionally need a quiet administrator who knows where everything is.'
+];
+try{beforeStoryProgress.peterAdministratorCompleted=JSON.parse(localStorage.getItem(BEFORE_STORY_SAVE_KEY))?.peterAdministratorCompleted===true;}catch(e){beforeStoryProgress.peterAdministratorCompleted=false;}
+const beforeStoryPeterButton=document.createElement('button');beforeStoryPeterButton.id='beforeStoryPeter';beforeStoryPeterButton.type='button';beforeStoryPeterButton.className='before-story-character-button';beforeStoryPeterButton.setAttribute('aria-expanded','false');beforeStoryPeterButton.setAttribute('aria-controls','beforeStoryPeterChapters');
+beforeStoryPeterButton.innerHTML='<b>03</b><span><small>CHARACTER STORY</small><strong>PETER CHAMBERS</strong></span><i>↗</i>';
+beforeStoryChrisChapters.after(beforeStoryPeterButton);
+const beforeStoryPeterChapters=document.createElement('section');beforeStoryPeterChapters.id='beforeStoryPeterChapters';beforeStoryPeterChapters.className='before-story-personal-chapters';beforeStoryPeterChapters.hidden=true;beforeStoryPeterChapters.setAttribute('aria-labelledby','beforeStoryPeterChapterTitle');
+beforeStoryPeterChapters.innerHTML='<small>PETER CHAMBERS / BC-01 / CHAPTER 1 / 2023 / CUTSCENE</small><h2 id="beforeStoryPeterChapterTitle">A QUIET ADMINISTRATOR</h2><p>2023. A Grade 7 at his computer, reflecting on the Director General he admires.</p><button id="beforeStoryAdministrator" type="button">BEGIN CHAPTER 1 →</button><button id="beforeStoryPeterBack" type="button">← BACK</button>';
+beforeStoryPeterButton.after(beforeStoryPeterChapters);
+function closeBeforeStoryPeterChapters(){beforeStoryPeterChapters.hidden=true;beforeStoryPeterButton.setAttribute('aria-expanded','false');}
+const peterStoryPreviousSelect=selectBeforeStoryCast;
+selectBeforeStoryCast=function(id){
+ const c=beforeStoryScene;if(!c||mode!=='beforeStoryMenu')return;
+ if(id!=='peter'){closeBeforeStoryPeterChapters();if(c.story==='peter')c.story=id==='chris'||id==='jake'?'chris':'josiah';peterStoryPreviousSelect(id);return;}
+ c.story='peter';if(!c.cast.peter){const actor=isolateBeforeStoryModel(makePeter());actor.name='Before the Story / Peter Chambers / BC-01';actor.userData.beforeStoryCode='BC-01';c.cast.peter=actor;c.root.add(actor);}
+ for(const [key,actor] of Object.entries(c.cast)){actor.visible=key==='peter';actor.position.set(0,0,0);}if(c.crownMenu)c.crownMenu.visible=false;c.actor=c.cast.peter;
+ document.getElementById('beforeStoryChapters').hidden=true;document.getElementById('beforeStoryJosiah').setAttribute('aria-expanded','false');closeBeforeStoryChrisChapters();document.querySelector('.before-story-profile>.before-story-cast').hidden=true;heathCast.hidden=true;
+ document.getElementById('beforeStoryCode').textContent='BC-01 / CHARACTER STORY 03 / YEAR 2023';document.getElementById('beforeStoryName').textContent='PETER CHAMBERS';document.getElementById('beforeStoryAlignment').textContent='GRADE 7 / A QUIET ADMINISTRATOR';document.getElementById('beforeStoryProfileText').textContent='In 2023, Peter Chambers is a Grade 7, preparing papers and keeping careful records. He admires Director General Josiah Richards, the Hero of Sendai and Explorer of Osaka, but his work gives him few opportunities to meet him.';
+ document.querySelectorAll('[data-before-cast]').forEach(button=>button.setAttribute('aria-pressed','false'));renderBeforeStoryMenu(0);syncMenuSong();
+};
+beforeStoryPeterButton.onclick=()=>{if(mode!=='beforeStoryMenu')return;const open=beforeStoryPeterChapters.hidden;selectBeforeStoryCast('peter');beforeStoryPeterChapters.hidden=!open;beforeStoryPeterButton.setAttribute('aria-expanded',String(open));(open?document.getElementById('beforeStoryPeterBack'):beforeStoryPeterButton).focus();};
+document.getElementById('beforeStoryPeterBack').onclick=()=>{closeBeforeStoryPeterChapters();beforeStoryScene.story='home';syncMenuSong();beforeStoryPeterButton.focus();};
+const peterStoryPreviousToggle=toggleBeforeStoryChapters;
+toggleBeforeStoryChapters=function(open){closeBeforeStoryPeterChapters();if(open&&beforeStoryScene?.actor===beforeStoryScene?.cast.peter)selectBeforeStoryCast('josiah');peterStoryPreviousToggle(open);};
+const peterStoryPreviousRefresh=refreshBeforeStoryChapters;
+refreshBeforeStoryChapters=function(){peterStoryPreviousRefresh();document.getElementById('beforeStoryAdministrator').textContent=beforeStoryProgress.peterAdministratorCompleted?'REPLAY CHAPTER 1 →':'BEGIN CHAPTER 1 →';};
+refreshBeforeStoryChapters();
+
+function writePeterWorkingNotes(b){
+ const ctx=b.screenCanvas.getContext('2d');ctx.fillStyle='#132532';ctx.fillRect(0,0,1024,512);ctx.fillStyle='#213c4b';ctx.fillRect(0,0,1024,45);ctx.fillStyle='#bfd6df';ctx.font='20px monospace';ctx.fillText('2023 / ADMINISTRATION / WORKING NOTES',28,31);ctx.fillStyle='#e8e5d7';ctx.fillRect(130,70,780,415);ctx.fillStyle='#334955';ctx.font='bold 24px monospace';ctx.fillText('DRAFT — FOR REVIEW',168,114);ctx.font='18px monospace';
+ const text=PETER_ADMINISTRATOR_LINES[b.line].slice(0,Math.floor(b.beat*16)),words=text.split(' ');let row='',y=165;for(const word of words){if((row+word).length>60){ctx.fillText(row,168,y);y+=31;row='';}row+=word+' ';}ctx.fillText(row,168,y);if(Math.floor(b.time*2)%2===0)ctx.fillRect(168+ctx.measureText(row).width,y-17,2,21);b.screenTexture.needsUpdate=true;
+}
+function buildPeterAdministrator(){
+ const c=beforeStoryScene,root=new THREE.Group();root.name='A Quiet Administrator / Peter Chambers office';c.root.add(root);const b=c.administrator={root,time:0,beat:0,line:0};
+ const wall=mat(0x777f7b),wood=mat(0x57473b),metal=mat(0x343e43),paper=mat(0xe2dbc8),navy=mat(0x202b35),skinTone=mat(0xdfb79d);
+ box(root,14,.2,12,mat(0x454a48),0,-.14,0);box(root,14,5,.25,wall,0,2.45,-4.5);for(const x of [-7,7])box(root,.25,5,12,wall,x,2.45,0);box(root,14,.2,12,mat(0xa7aca2),0,5,0);
+ for(let x=-6;x<=6;x+=2)box(root,.035,.01,12,mat(0x323b3a),x,-.025,0);
+ const window=new THREE.Group();window.name='Office window / enclosed interior';window.position.set(-4.5,2.7,-4.33);root.add(window);box(window,3,2.4,.12,metal);box(window,2.8,2.2,.14,new THREE.MeshBasicMaterial({color:0x8ba6b7}),0,0,.02);for(const y of [-.8,-.4,0,.4,.8])box(window,2.8,.08,.05,paper,0,y,.12);box(window,.08,2.3,.05,metal,0,0,.14);
+ box(root,3.5,.12,1.9,wood,0,1.06,.75);for(const x of [-1.5,1.5])for(const z of [.02,1.45])box(root,.13,1,.13,metal,x,.52,z);
+ for(const x of [-4.8,4.8]){box(root,1.65,2.4,1,metal,x,1.2,-3.7);for(const y of [.5,1.1,1.7,2.3]){box(root,1.5,.03,.03,paper,x,y-.25,-3.17);box(root,.45,.10,.04,mat(0x82918f),x,y,-3.14);}}
+ const notice=heathSign('WORKING PAPERS','#c2c9bc','#46534d',2.5);notice.position.set(1.9,3.3,-4.32);root.add(notice);for(let i=0;i<5;i++){const sheet=box(root,.45,.65,.015,paper,1.05+i%3*.6,2.6-Math.floor(i/3)*.7,-4.22);sheet.rotation.z=(i%3-1)*.08;}
+ // A seated Peter keeps his usual face and suit; bent legs stay beneath the desk.
+ b.hero=isolateBeforeStoryModel(makePeter());b.hero.name='Peter Chambers / BC-01 / writing at a computer';b.hero.userData.beforeStoryCode='BC-01';root.add(b.hero);b.hero.userData.legs.forEach(leg=>leg.visible=false);
+ for(const side of [-1,1]){box(b.hero,.23,.23,.48,navy,side*.155,.82,.18);box(b.hero,.23,.66,.25,navy,side*.155,.43,.42);ball(b.hero,.15,.11,.24,mat(0x171b20),side*.155,.10,.49);}
+ box(root,.9,.12,.75,metal,0,.75,-.1);box(root,.85,.92,.13,metal,0,1.27,-.44);for(const x of [-.35,.35])for(const z of [-.35,.1])box(root,.07,.75,.07,metal,x,.36,z);
+ b.screenCanvas=document.createElement('canvas');b.screenCanvas.width=1024;b.screenCanvas.height=512;b.screenTexture=new THREE.CanvasTexture(b.screenCanvas);b.screenTexture.colorSpace=THREE.SRGBColorSpace;
+ const monitor=new THREE.Group();monitor.name='Peter computer / working notes';monitor.position.set(.5,1.12,1.18);root.add(monitor);box(monitor,1.48,.88,.13,metal,0,.58,0);mesh(new THREE.PlaneGeometry(1.34,.75),new THREE.MeshBasicMaterial({map:b.screenTexture}),monitor,0,.58,-.073).rotation.y=Math.PI;box(monitor,.12,.28,.12,metal,0,.12,0);box(monitor,.6,.05,.34,metal,0,-.005,0);
+ box(root,1.08,.06,.37,metal,0,1.15,.64);b.keys=[];for(let row=0;row<4;row++)for(let col=0;col<12;col++){const key=box(root,.069,.018,.062,mat(0xabb8b9),-.44+col*.08,1.19,.52+row*.075);b.keys.push(key);}box(root,.37,.022,.052,mat(0xc1ccca),0,1.195,.86);
+ ball(root,.11,.04,.15,metal,.85,1.16,.65);box(root,.8,.02,.65,paper,-1.12,1.15,.8);box(root,.72,.03,.59,mat(0x8a5a4b),-1.1,1.17,.8);mesh(new THREE.CylinderGeometry(.13,.11,.25,20),paper,root,1.2,1.25,1.28);const handle=mesh(new THREE.TorusGeometry(.075,.02,6,14),paper,root,1.34,1.25,1.28);handle.rotation.y=Math.PI/2;
+ const lamp=new THREE.Group();lamp.position.set(-1.1,1.14,1.38);root.add(lamp);box(lamp,.34,.05,.3,metal);line3(lamp,[[0,0,0],[0,.65,0],[.25,.83,0]],metal,.035);ball(lamp,.24,.08,.18,metal,.25,.82,0);const light=new THREE.PointLight(0xffe1b9,13,7);light.position.set(.25,.70,0);lamp.add(light);
+ root.add(new THREE.HemisphereLight(0xacc1cf,0x665549,1.2));const daylight=new THREE.DirectionalLight(0xc5dbe4,1);daylight.position.set(-4,6,2);root.add(daylight);b.mouth=makeBeforeStorySpeechMouth('peterAdministrator',b.hero);writePeterWorkingNotes(b);return b;
+}
+function clearPeterAdministrator(){const c=beforeStoryScene;if(!c?.administrator)return;disposeCampObject(c.administrator.root);c.administrator=null;keys.clear();}
+function startPeterAdministrator(){
+ const c=beforeStoryScene;if(!c||mode!=='beforeStoryMenu')return;clearPeterAdministrator();clearBeforeStoryHeath();clearPinterRomford();stopBeforeStoryVoice();
+ c.story='peter';c.chapter='peterAdministrator';for(const key of ['menuSet','romeSet','jukoSet','lastJukoSet','heathNarrationSet'])if(c[key])c[key].visible=false;for(const a of Object.values(c.cast))a.visible=false;if(c.crownMenu)c.crownMenu.visible=false;buildPeterAdministrator();setMode('beforeStoryAdministrator');beforeStoryUI.hidden=true;beforeStoryCinema.hidden=false;hideUndeadCampaignCast();world.visible=upperWorld.visible=exhibit.visible=flash.visible=false;scene.background.setHex(0x535e65);scene.fog.color.setHex(0x535e65);scene.fog.density=.01;ambient.intensity=.95;cameraFill.intensity=.4;keys.clear();
+ document.getElementById('beforeStoryCinemaChapter').textContent='BEFORE THE STORY / PETER CHAMBERS / CHAPTER 1';document.getElementById('beforeStoryCinemaTitle').innerHTML='A QUIET ADMINISTRATOR <span>2023</span>';showPeterAdministratorLine();renderPeterAdministrator(0);syncMenuSong();updateMobileControls();
+}
+function showPeterAdministratorLine(){const b=beforeStoryScene.administrator;b.beat=0;b.timeline=beforeStorySpeechTimeline(PETER_ADMINISTRATOR_LINES[b.line]);document.getElementById('beforeStorySpeaker').textContent='PETER CHAMBERS / BC-01';document.getElementById('beforeStoryLine').textContent=PETER_ADMINISTRATOR_LINES[b.line];document.getElementById('beforeStoryCount').textContent=(b.line+1)+' / '+PETER_ADMINISTRATOR_LINES.length;document.getElementById('beforeStoryNext').textContent=b.line===PETER_ADMINISTRATOR_LINES.length-1?'FINISH CHAPTER →':'CONTINUE →';writePeterWorkingNotes(b);}
+function returnPeterAdministrator(){clearPeterAdministrator();returnBeforeStoryRome();selectBeforeStoryCast('peter');beforeStoryPeterChapters.hidden=false;beforeStoryPeterButton.setAttribute('aria-expanded','true');document.getElementById('beforeStoryAdministrator').focus();}
+function advancePeterAdministrator(){const b=beforeStoryScene?.administrator;if(mode!=='beforeStoryAdministrator'||!b)return;if(b.line===PETER_ADMINISTRATOR_LINES.length-1){beforeStoryProgress.peterAdministratorCompleted=true;saveBeforeStoryProgress();refreshBeforeStoryChapters();returnPeterAdministrator();}else{b.line++;showPeterAdministratorLine();}}
+function renderPeterAdministrator(dt){
+ const c=beforeStoryScene,b=c?.administrator;if(!b)return;b.time+=dt;b.beat+=dt;const u=b.hero.userData;u.body.position.y=Math.sin(b.time*1.4)*.008;u.head.rotation.x=.16+Math.sin(b.time*.35)*.025;u.head.rotation.y=Math.sin(b.time*.2)*.04;
+ for(const [i,arm] of u.arms.entries()){arm.rotation.x=-1.05+Math.sin(b.time*7+i*2)*.045;arm.rotation.z=(i?1:-1)*.07;}
+ const key=b.keys[Math.floor(b.time*7)%b.keys.length];b.keys.forEach(k=>k.position.y=1.19);key.position.y=1.182;if(Math.floor(b.time*12)!==b.screenFrame){b.screenFrame=Math.floor(b.time*12);writePeterWorkingNotes(b);}
+ const level=peterAdministratorVoiceLevel();b.mouth.open.visible=level>.04;b.mouth.open.scale.set(b.mouth.width,.006+level*.025,.009);b.mouth.closed.visible=!b.mouth.open.visible;u.openMouth.visible=false;
+ const opening=b.line===0?THREE.MathUtils.smoothstep(b.beat,0,7):1,eye=new THREE.Vector3(-3,2.8,-3.4).lerp(new THREE.Vector3(-3.3,2.65,3.0),opening);eye.x+=Math.sin(b.time*.1)*.08;camera.up.set(0,1,0);camera.position.copy(c.root.position).add(eye);camera.lookAt(c.root.position.clone().add(new THREE.Vector3(0,1.67,.35)));camera.updateMatrixWorld(true);
+ if(peterAdministratorLineComplete(dt))advancePeterAdministrator();
+}
+document.getElementById('beforeStoryAdministrator').onclick=startPeterAdministrator;
+const administratorPreviousNext=document.getElementById('beforeStoryNext').onclick;document.getElementById('beforeStoryNext').onclick=()=>mode==='beforeStoryAdministrator'?advancePeterAdministrator():administratorPreviousNext();
+const administratorPreviousReturn=document.getElementById('beforeStoryReturn').onclick;document.getElementById('beforeStoryReturn').onclick=()=>mode==='beforeStoryAdministrator'?returnPeterAdministrator():administratorPreviousReturn();
+const peterStoryPreviousClear=clearBeforeStoryMenu;clearBeforeStoryMenu=function(){clearPeterAdministrator();closeBeforeStoryPeterChapters();peterStoryPreviousClear();};
+document.addEventListener('keydown',e=>{if(e.repeat||!beforeStoryEraseDialog.hidden)return;if(mode==='beforeStoryAdministrator'){if(e.code==='Enter'){e.preventDefault();e.stopImmediatePropagation();advancePeterAdministrator();}else if(e.code==='Escape'){e.preventDefault();e.stopImmediatePropagation();returnPeterAdministrator();}}else if(mode==='beforeStoryMenu'&&e.code==='Escape'&&!beforeStoryPeterChapters.hidden){e.preventDefault();e.stopImmediatePropagation();document.getElementById('beforeStoryPeterBack').click();}},true);

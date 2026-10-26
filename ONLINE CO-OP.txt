@@ -1,0 +1,18 @@
+SURVIVE THE UNDEAD - ONLINE CO-OP
+
+This mode has a separate survival record. Campaign progress and character statuses are unaffected. It is unavailable in the Last Refusal menus.
+
+1. Open SURVIVE THE UNDEAD, watch or skip the opening, and choose a character.
+2. Choose MAPS > BC GOVERNMENT COMPLEX.
+3. The host chooses HOST ONLINE CO-OP, then CREATE INVITE.
+4. Send that code to one friend. They choose JOIN ONLINE CO-OP, paste the invitation and choose JOIN / CREATE REPLY.
+5. The friend sends the reply code back. The host pastes it and chooses ACCEPT REPLY.
+6. Repeat with separate invitations for up to three friends (four players total).
+7. Guests choose READY. The host chooses START SURVIVAL.
+
+The host runs enemies, waves, damage and revives. Leaving the host ends that session. Hold USE near a downed teammate to revive them. Service lifts connect the two floors. Supply crates restore health.
+
+WINDOWS: WASD move, mouse aim, click fire, Shift run, R reload, E use lift / hold to revive, Esc pause.
+TOUCH: left joystick moves; swipe the right side to aim; FIRE, RELOAD, RUN, USE and pause buttons appear in play.
+
+Connections use WebRTC with direct invite/reply codes. There is no public matchmaking service or relay server included. Some restrictive networks may prevent a direct connection; an internet-wide deployment may require a TURN relay. Four-player connections and gameplay were tested in local browser sessions. Separate remote networks have not been verified.
