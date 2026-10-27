@@ -114,3 +114,11 @@ PROLOGUE appears before Chapter 1: Enter Brent Cross. Gareth Williams speaks alo
 The scene advances automatically, with Enter/Space and touch buttons for advancing, skipping the prologue, or returning to the menu. H/F1 opens the shared controls guide. GW1–GW12 are attached in order. All twelve lines advance after playback ends, with lip movement measured from each recording. Skipping, leaving or replaying stops the previous voice, and the controls guide pauses/resumes the active recording. The full script is saved in the adjacent Project BC - Prologue - Gareth Williams dialogue.md document.
 
 Chapter audio is loaded when played on desktop and mobile, avoiding preloading every story recording at startup. Returning to the main menu also disposes unfinished atrium, Cabinet and Stephen rescue scenes without completing them or advancing the story.
+
+## Publishing on itch.io
+
+Run `python3 make-itch-zip.py` in the repo root. It writes `project-bc-itch.zip` (git-ignored) with `index.html` at the top level, leaving out notes, `.git` and tooling, and checks itch.io's 1000-file limit.
+
+On itch.io: **Kind of project → HTML**, upload the ZIP, tick **This file will be played in the browser**, and under **Embed options** pick *Click to launch in fullscreen* (best on phones) or set a viewport of 1280×720 and enable the **Fullscreen button** and **Mobile friendly** (landscape) options.
+
+Voice clips and music live as separate `.mp3` files in `assets/` and `assets/audio/` rather than being embedded as base64 inside the scripts. That kept `game.js` at ~55 MB and `tyrant4.js` at ~16 MB, which phones and itch.io's player struggled to load; they are now under 0.5 MB each. Keep new audio as files in `assets/`.

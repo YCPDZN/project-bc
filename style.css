@@ -996,3 +996,61 @@ body.accessible-large-touch.touch-controls #mobilePause{min-width:52px;min-heigh
 #menu.laniakea-aftermath .menu-actions>#openGarethPrologueMenu{display:block!important;max-width:570px;width:100%}
 
 #garethPrologueStatus{font:11px/1.5 monospace;color:#b7dbbf}
+/* Touch controls: round, evenly spaced buttons that never overlap each other or the HUD */
+body.touch-controls{--tb:54px;--tb-gap:8px}
+body.touch-controls.accessible-large-touch{--tb:62px;--tb-gap:9px}
+body.touch-controls #mobileControls #mobileActions{grid-template-columns:repeat(3,var(--tb));grid-auto-rows:var(--tb);gap:var(--tb-gap);direction:rtl;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom))}
+body.touch-controls #mobileControls #mobileActions button{direction:ltr;width:var(--tb);height:var(--tb);min-width:0;min-height:0;padding:0;border-radius:50%;display:grid;place-items:center;text-align:center;font:700 9px/1.1 system-ui,sans-serif;letter-spacing:.06em;color:#f7ecf0;background:radial-gradient(circle at 50% 35%,#ffffff1f,#0000 70%),#120a16a6;border:1.5px solid #f3dbe347;box-shadow:0 4px 14px #0008,inset 0 1px 0 #ffffff1a;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .08s,background .08s}
+body.touch-controls #mobileControls #mobileActions button:hover{transform:none}
+body.touch-controls #mobileControls #mobileActions button.pressed{background:#c23a58cc;border-color:#ffd3dd;transform:scale(.93)}
+body.touch-controls #mobileControls #mobileActions [data-action=fire]{background:radial-gradient(circle at 50% 35%,#ffffff2a,#0000 70%),#a62a46d9;border-color:#ff9db2aa;font-size:11px}
+body.touch-controls #mobileControls #mobileActions [data-action=fire].pressed{background:#e04466}
+body.touch-controls #mobileStick{width:124px;height:124px;left:max(20px,env(safe-area-inset-left));bottom:calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle,#ffffff0d 0 55%,#0000 56%),#120a1680;border:1.5px solid #f3dbe347;box-shadow:0 4px 18px #0007;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+body.touch-controls #mobileStickKnob{width:52px;height:52px;border:1.5px solid #ffe6ee99;background:radial-gradient(circle at 40% 35%,#ffffff55,#b97b8c99 60%,#5e3b49cc);box-shadow:0 3px 10px #0009}
+body.touch-controls #mobileStick small{bottom:-18px;font:700 8px system-ui,sans-serif;letter-spacing:.12em;color:#f3dbe3aa;text-shadow:0 1px 3px #000}
+body.touch-controls #mobileControls #mobilePause{left:auto;right:max(14px,env(safe-area-inset-right));top:calc(10px + env(safe-area-inset-top));width:40px;height:40px;min-width:0;min-height:0;max-width:none;padding:0;border-radius:50%;display:grid;place-items:center;font:700 14px system-ui,sans-serif;color:#f7ecf0;background:#120a16b3;border:1.5px solid #f3dbe347;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+body.touch-controls #controlsHelpButton{width:40px;height:40px;min-height:0;padding:0;border-radius:50%;font-size:0;letter-spacing:0;left:auto;right:calc(max(14px,env(safe-area-inset-right)) + 48px);transform:none;top:calc(10px + env(safe-area-inset-top));background:#120a16b3;border:1.5px solid #f3dbe347;display:grid;place-items:center}
+body.touch-controls #controlsHelpButton:hover{transform:none}
+body.touch-controls:has(#mobileControls:not([hidden])) .hud-top{right:118px}
+body.touch-controls #controlsHelpButton::after{content:'?';font:700 16px system-ui,sans-serif;color:#f7ecf0}
+body.touch-controls #mobileControls[hidden]~#controlsHelpButton,body.touch-controls:has(#mobileControls[hidden]) #controlsHelpButton{left:50%;right:auto;width:auto;font-size:10px;padding:0 14px;border-radius:20px;transform:translateX(-50%)}
+body.touch-controls:has(#mobileControls[hidden]) #controlsHelpButton::after{content:none}
+body.touch-controls #mobileHint{display:none}
+body.touch-controls #miniPanel{width:132px;padding:6px}
+body.touch-controls #miniPanel :is(.mini-legend,.mini-note,#peterStatus,.gareth-dot){display:none}
+@media(max-height:500px){
+ body.touch-controls{--tb:50px;--tb-gap:7px}
+ body.touch-controls.accessible-large-touch{--tb:56px}
+ body.touch-controls #mobileControls #mobileActions{grid-template-columns:repeat(4,var(--tb));bottom:calc(12px + env(safe-area-inset-bottom))}
+ body.touch-controls #mobileStick{width:112px;height:112px;bottom:calc(22px + env(safe-area-inset-bottom))}
+ body.touch-controls #miniPanel{top:76px;width:118px}
+}
+/* Keep chapter HUDs clear of the touch controls */
+body.touch-controls #mobileControls.rescuing #mobileActions{top:36%;bottom:auto}
+body.touch-controls[data-touch-mode] #campHUD .cinema-top,body.touch-controls #campHUD .cinema-top{padding-right:118px}
+body.touch-controls .rooms-controls{display:none}
+body.touch-controls .rooms-map{top:60px}
+@media(max-height:500px){
+ body.touch-controls .camp-health{top:56px;width:190px;padding:8px 10px;font-size:10px;max-height:calc(100dvh - 210px);overflow:hidden}
+ body.touch-controls .camp-health :is(small,#campPickup,#campAllies){display:none}
+ body.touch-controls .camp-health p{margin:5px 0}
+ body.touch-controls :is(#campHUD .cinema-dialogue,#josiahAtriumDialogue.combat-dialogue){left:160px;right:calc(4 * var(--tb) + 3 * var(--tb-gap) + 28px);bottom:calc(10px + env(safe-area-inset-bottom));width:auto;max-width:none;transform:none;padding:8px 12px;font-size:11px}
+ body.touch-controls #campHUD .camp-objective{font-size:13px;margin:4px 0}
+}
+@media(min-height:501px){body.touch-controls #campHUD .cinema-dialogue{bottom:calc(200px + env(safe-area-inset-bottom))}}
+/* Pause and ? take ~105px of the top-right corner, so keep HUD corners clear of both */
+body.touch-controls #hud .hud-top,body.touch-controls #freeRoamHUD{right:112px}
+body.touch-controls #peterUxbridgeHUD aside{right:112px}
+body.touch-controls #beforeStoryHeathHUD>aside{top:65px;right:var(--touch-right)}
+body.touch-controls :is(#beforeStoryKenjiHUD,#unionFightHUD,#beforeStoryBozukiHUD,#beforeStoryShibuyaHUD)>aside,body.touch-controls #beforeStoryFacelessHUD aside{top:65px;right:var(--touch-right)}
+/* Portrait: four slimmer columns keep the buttons to two rows, below the HUD panels */
+@media(orientation:portrait){
+ body.touch-controls{--tb:50px;--tb-gap:7px}
+ body.touch-controls.accessible-large-touch{--tb:54px}
+ body.touch-controls #mobileControls #mobileActions{grid-template-columns:repeat(4,var(--tb))}
+ body.touch-controls #mobileStick{width:112px;height:112px}
+}
+@media(orientation:portrait) and (max-width:380px){body.touch-controls{--tb:46px;--tb-gap:6px}body.touch-controls.accessible-large-touch{--tb:50px}}
+body.touch-controls #spaceBossHUD .space-boss-top{width:calc(100vw - 128px)}
+/* The keyboard guide pill covers cutscene titles on phones; it stays on the main menu and as ? during play */
+body.touch-controls:has(#mobileControls[hidden]):has(#beforeStoryUI:not([hidden]),#beforeStoryCinema:not([hidden]),section:not([hidden])>.cinema-top) #controlsHelpButton{display:none}
