@@ -1052,3 +1052,5 @@ body.touch-controls :is(#beforeStoryKenjiHUD,#unionFightHUD,#beforeStoryBozukiHU
 }
 @media(orientation:portrait) and (max-width:380px){body.touch-controls{--tb:46px;--tb-gap:6px}body.touch-controls.accessible-large-touch{--tb:50px}}
 body.touch-controls #spaceBossHUD .space-boss-top{width:calc(100vw - 128px)}
+/* The keyboard guide pill covers cutscene titles on phones; it stays on the main menu and as ? during play */
+body.touch-controls:has(#mobileControls[hidden]):has(#beforeStoryUI:not([hidden]),#beforeStoryCinema:not([hidden]),section:not([hidden])>.cinema-top) #controlsHelpButton{display:none}
