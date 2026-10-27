@@ -1042,3 +1042,13 @@ body.touch-controls .rooms-map{top:60px}
 body.touch-controls #hud .hud-top,body.touch-controls #freeRoamHUD{right:112px}
 body.touch-controls #peterUxbridgeHUD aside{right:112px}
 body.touch-controls #beforeStoryHeathHUD>aside{top:65px;right:var(--touch-right)}
+body.touch-controls :is(#beforeStoryKenjiHUD,#unionFightHUD,#beforeStoryBozukiHUD,#beforeStoryShibuyaHUD)>aside,body.touch-controls #beforeStoryFacelessHUD aside{top:65px;right:var(--touch-right)}
+/* Portrait: four slimmer columns keep the buttons to two rows, below the HUD panels */
+@media(orientation:portrait){
+ body.touch-controls{--tb:50px;--tb-gap:7px}
+ body.touch-controls.accessible-large-touch{--tb:54px}
+ body.touch-controls #mobileControls #mobileActions{grid-template-columns:repeat(4,var(--tb))}
+ body.touch-controls #mobileStick{width:112px;height:112px}
+}
+@media(orientation:portrait) and (max-width:380px){body.touch-controls{--tb:46px;--tb-gap:6px}body.touch-controls.accessible-large-touch{--tb:50px}}
+body.touch-controls #spaceBossHUD .space-boss-top{width:calc(100vw - 128px)}

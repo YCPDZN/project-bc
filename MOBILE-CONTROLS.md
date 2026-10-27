@@ -30,3 +30,5 @@ Windows alternate fire: press or hold Z to shoot or use the current chain attack
 ## Look
 
 Action buttons are round, evenly spaced and fill from the bottom-right, so a partial row lines up with the screen edge. FIRE is the red button. The joystick is a frosted ring with a soft knob. Pause (Ⅱ) and the controls guide (?) are two small round buttons in the top-right corner during play; outside play the guide button returns to its full "CONTROLS" label. With the large touch targets setting on, the buttons grow from 54 px to 62 px and the grid grows with them, so they never overlap. On touch screens the minimap drops its text legend to stay clear of the buttons.
+
+In portrait the action buttons use four narrower columns, so even seven or eight actions take only two rows and stay below the HUD panels. Chapter HUDs keep their top-right maps and boss bars clear of the pause and ? buttons, and bottom dialogue boxes sit between the joystick and the buttons on short landscape screens.
