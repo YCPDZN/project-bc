@@ -1025,3 +1025,20 @@ body.touch-controls #miniPanel :is(.mini-legend,.mini-note,#peterStatus,.gareth-
  body.touch-controls #mobileStick{width:112px;height:112px;bottom:calc(22px + env(safe-area-inset-bottom))}
  body.touch-controls #miniPanel{top:76px;width:118px}
 }
+/* Keep chapter HUDs clear of the touch controls */
+body.touch-controls #mobileControls.rescuing #mobileActions{top:36%;bottom:auto}
+body.touch-controls[data-touch-mode] #campHUD .cinema-top,body.touch-controls #campHUD .cinema-top{padding-right:118px}
+body.touch-controls .rooms-controls{display:none}
+body.touch-controls .rooms-map{top:60px}
+@media(max-height:500px){
+ body.touch-controls .camp-health{top:56px;width:190px;padding:8px 10px;font-size:10px;max-height:calc(100dvh - 210px);overflow:hidden}
+ body.touch-controls .camp-health :is(small,#campPickup,#campAllies){display:none}
+ body.touch-controls .camp-health p{margin:5px 0}
+ body.touch-controls :is(#campHUD .cinema-dialogue,#josiahAtriumDialogue.combat-dialogue){left:160px;right:calc(4 * var(--tb) + 3 * var(--tb-gap) + 28px);bottom:calc(10px + env(safe-area-inset-bottom));width:auto;max-width:none;transform:none;padding:8px 12px;font-size:11px}
+ body.touch-controls #campHUD .camp-objective{font-size:13px;margin:4px 0}
+}
+@media(min-height:501px){body.touch-controls #campHUD .cinema-dialogue{bottom:calc(200px + env(safe-area-inset-bottom))}}
+/* Pause and ? take ~105px of the top-right corner, so keep HUD corners clear of both */
+body.touch-controls #hud .hud-top,body.touch-controls #freeRoamHUD{right:112px}
+body.touch-controls #peterUxbridgeHUD aside{right:112px}
+body.touch-controls #beforeStoryHeathHUD>aside{top:65px;right:var(--touch-right)}
