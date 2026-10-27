@@ -1,0 +1,33 @@
+# Builds the itch.io upload ZIP and publishes it as the "itch-latest" release,
+# so it can be downloaded from:
+# https://github.com/YCPDZN/project-bc/releases/download/itch-latest/project-bc-itch.zip
+name: itch.io ZIP
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: itch-zip
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ZIP
+        run: python3 make-itch-zip.py
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete itch-latest --yes --cleanup-tag || true
+          gh release create itch-latest project-bc-itch.zip \
+            --title "itch.io build (latest main)" \
+            --notes "Upload project-bc-itch.zip to itch.io as an HTML game. Built from ${GITHUB_SHA::7}." \
+            --target "$GITHUB_SHA"

@@ -122,3 +122,5 @@ Run `python3 make-itch-zip.py` in the repo root. It writes `project-bc-itch.zip`
 On itch.io: **Kind of project → HTML**, upload the ZIP, tick **This file will be played in the browser**, and under **Embed options** pick *Click to launch in fullscreen* (best on phones) or set a viewport of 1280×720 and enable the **Fullscreen button** and **Mobile friendly** (landscape) options.
 
 Voice clips and music live as separate `.mp3` files in `assets/` and `assets/audio/` rather than being embedded as base64 inside the scripts. That kept `game.js` at ~55 MB and `tyrant4.js` at ~16 MB, which phones and itch.io's player struggled to load; they are now under 0.5 MB each. Keep new audio as files in `assets/`.
+
+Every push to `main` also builds the ZIP on GitHub Actions and publishes it at https://github.com/YCPDZN/project-bc/releases/download/itch-latest/project-bc-itch.zip, so it can be downloaded from a phone.
